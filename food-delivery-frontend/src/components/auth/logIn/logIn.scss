@@ -1,0 +1,111 @@
+@use '../../../assets/scss/base.scss';
+
+body {
+  background-color: base.$primary-background-light;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+
+.logIn {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 33px;
+    background-color: base.$primary-color-white;
+    width: 100%;
+    height: calc(39.6vh);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 40px;
+    box-sizing: border-box;
+
+    img {
+      padding-top: 43px;
+    }
+
+    h2 {
+      @include base.font($font-size: 28px, $font-weight: 700, $line-height: 42px);
+    }
+
+    span {
+      @include base.font($color: base.$primary-color-dark-light);
+      padding-bottom: 23px;
+    }
+
+    &-btns {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    button {
+      @include base.font($font-size: 18px, $font-weight: 400, $line-height: 27px, $color: base.$primary-color-dark);
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__forgot-password{
+      margin-top: 20px;
+      display: flex;
+      width: calc(76.5vw);
+      align-items: center;
+      justify-content: space-between;
+      img{
+        width: 20px;
+      }
+      a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        @include base.font($font-size: 13px, $font-weight: 700, $line-height: 19.5px, $color: base.$primary-color-dark-green);
+      }
+    }
+    p {
+      @include base.font($font-size: 12px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+    }
+
+    &__email {
+      margin-bottom: 31.7px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #104E5B;
+      background-color: transparent;
+      width: calc(76.5vw);
+    }
+
+    &__password {
+      position: relative;
+
+      button {
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+      }
+    }
+
+    &__button {
+      width: calc(66.13vw);
+      height: 45px;
+      background:base.$primary-color-peachy;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: calc(5.35vh);
+      button{
+        @include base.font($font-size: 16px, $font-weight: 600, $line-height: 28px, $color: base.$primary-color-dark);
+      }
+    }
+  }
+}
