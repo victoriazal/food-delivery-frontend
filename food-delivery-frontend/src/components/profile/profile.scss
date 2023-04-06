@@ -1,0 +1,59 @@
+@use '../../assets/scss/base.scss';
+
+body {
+  background-color: base.$primary-background-light;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+.profile{
+
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+   h2{
+    padding-left: calc(6.2vw);
+    padding-top: 29px;
+    @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+   }
+   h3{
+    @include base.font($font-size: 16px, $font-weight: 700, $line-height: 24px, $color: base.$primary-color-dark-green);
+   }
+   h4{
+    @include base.font($font-size: 11px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-green);
+   }
+    margin-bottom: 33px;
+    background-color: base.$primary-color-white;
+    width: 100%;
+    height: calc(31.76vh);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 40px;
+    box-sizing: border-box;
+
+    &-btns {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      position: absolute;
+      bottom: 14px;
+      @include base.font($font-size: 11px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-green);
+    }
+    &-photo{
+      width: 70px;
+      height: 70px;
+      border-radius: 50px;
+      border: 0.5px solid base.$primary-color-dark-green;
+      margin-right: calc(5.88vw);
+    }
+    &-data{
+      display: flex;
+      padding-left: calc(6.2vw);
+      padding-top: 39px;
+    }
+
+  }
+}
