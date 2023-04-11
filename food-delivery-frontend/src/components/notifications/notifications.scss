@@ -1,0 +1,22 @@
+@use '../../assets/scss/base.scss';
+
+.notifications-page {
+  .notifications {
+    margin-top: 44px;
+    @include base.flex;
+
+    &-card {
+      background-color: base.$primary-color-white;
+      width: calc(80.5vw);
+      height: calc(17.3vh);
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
+      border-radius: 20px;
+    }
+  }
+
+  h3 {
+    width: calc(43.4vw);
+    margin: 29px 0 0 23px;
+    @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+  }
+}
