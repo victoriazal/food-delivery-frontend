@@ -10,6 +10,9 @@ button {
 }
 
 .signUp {
+  input:focus{
+    outline: none;
+  }
   &__header {
     display: flex;
     flex-direction: column;

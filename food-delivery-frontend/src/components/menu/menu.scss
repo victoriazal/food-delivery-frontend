@@ -1,0 +1,50 @@
+@use '../../assets/scss/base.scss';
+
+.menu-page {
+  ul {
+    display: flex;
+    list-style: none;
+  }
+
+  &_header {
+    @include base.flex($justify-content: space-between);
+
+    h3 {
+      width: calc(43.4vw);
+      margin: 29px 0 0 23px;
+      @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+    }
+
+    .profile-link {
+      width: 70px;
+      height: 70px;
+      margin: 35px 29px 0 0;
+      border-radius: 50px;
+      border: 0.5px solid base.$primary-color-dark-green;
+    }
+  }
+
+  .promotion {
+    background-color: base.$primary-color-peachy-light;
+    width: calc(77vw);
+    height: calc(18.4vh);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    margin: calc(5vh) auto 0 auto;
+    @include base.flex($justify-content: space-around);
+    box-sizing: border-box;
+    button {
+      background-color: base.$primary-color-peachy;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 20px;
+      margin-top: 15px;
+      @include base.font($font-size: 9px, $font-weight: 700, $line-height: 28px, $color: base.$primary-color-dark-green);
+    }
+    h4{
+      @include base.font($font-size: 17px, $font-weight: 700, $line-height: 26px, $color: base.$primary-color-dark-green);
+    }
+    h5{
+      @include base.font($font-size: 11px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+    }
+  }
+}
