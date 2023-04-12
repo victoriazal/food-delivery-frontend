@@ -1,18 +1,36 @@
 @use '../../assets/scss/base.scss';
 
-.home-page{
-  ul{
+.home-page {
+  .wrapper{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .dish {
+    grid-column-start: auto;
+    width: calc(34.6vw);
+    height: calc(25.48vh);
+    background-color: base.$primary-color-white;
+    @include base.flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 0px 20px;
+  }
+
+  ul {
     display: flex;
     list-style: none;
   }
-  &_header{
-    @include base.flex($justify-content:space-between);
-    h3{
+
+  &_header {
+    @include base.flex($justify-content: space-between);
+
+    h3 {
       width: calc(40.5vw);
       margin: 29px 0 0 23px;
       @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
     }
-    .profile-link{
+
+    .profile-link {
       width: 70px;
       height: 70px;
       margin: 35px 29px 0 0;
@@ -21,4 +39,4 @@
     }
   }
 
- }
+}

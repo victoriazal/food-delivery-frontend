@@ -1,11 +1,12 @@
 import './menu.scss'
 import addPhoto from '../../assets/images/photo.png'
 import promotionPhoto from '../../assets/images/image_shopping_app.png'
+
 const Menu = () => {
-  return (
+return (
     <div className='menu-page'>
       <div className='menu-page_header'>
-      <h3>Let’s eat Favorite food  </h3>
+      <h3>Let’s eat Favorite food</h3>
       <button className='profile-link' ><img src={addPhoto}/></button>
       </div>
       <div className='menu-page_filter'>
