@@ -13,6 +13,15 @@ const LogIn: React.FC = (): JSX.Element => {
   const [password,setPassword] = useState('')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+  // show and hide password
+  const toggleShowPassword = (e:{preventDefault:()=> void},input:string)=>{
+    e.preventDefault()
+    let myInput = document.getElementById(input) as HTMLInputElement
+    myInput!.type === "password" ? myInput!.type = "text":myInput!.type = "password"
+}
+
+// loginLogic
   const handleLogIn = async(e:{preventDefault:()=> void})=>{
     try{
       e.preventDefault()
@@ -48,11 +57,11 @@ const LogIn: React.FC = (): JSX.Element => {
               <p>Password</p>
               <div>
               <input onChange={(e)=>{setPassword(e.target.value)}} type="password" name="password" id="logInPassword" />
-              <button className='logIn-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
+              <button  onClick={(e)=>{toggleShowPassword(e,"logInPassword")}} className='logIn-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
               </div>
             </div>
             <div className='logIn-form__forgot-password'>
-              <a href='/home'><img src={googleLogo}/>LogIn with Google</a>
+              <a href='/home'><img alt="google authentification" src={googleLogo}/>LogIn with Google</a>
               <a href='/home'>Forgot password?</a>
             </div>
             <div className='logIn-form__button'>

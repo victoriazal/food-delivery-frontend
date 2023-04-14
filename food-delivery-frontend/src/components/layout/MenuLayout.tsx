@@ -5,12 +5,12 @@ import menuIcon from "../../assets/images/menu-icons/book.png"
 import profileIcon from "../../assets/images/menu-icons/profile.png"
 import shopIcon from "../../assets/images/menu-icons/shop.png"
 import './menuLayout.scss'
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation} from "react-router-dom";
 import { Link } from "react-router-dom";
 import Home from "../home/Home";
-import PageNotFound from "../notFound/PageNotFound";
 import Menu from "../menu/Menu";
 import Notifications from "../notifications/Notifications";
+import Cart from "../cart/Cart";
 
 const MenuLayout = () => {
   const location = useLocation()
@@ -22,6 +22,7 @@ const MenuLayout = () => {
           <Route path='menu' element={<Menu />} />
           <Route path='profile' element={<Profile />} />
           <Route path='notifications' element={<Notifications />} />
+          <Route path='cart' element={<Cart />} />
         </Routes>
       </div>
       <nav className="bottom-menu">
@@ -37,9 +38,11 @@ const MenuLayout = () => {
         </div>
         <div className="bottom-menu_center">
           <div className="circle-wrapper">
+          <Link to="cart">
             <button className="bottom-menu_center-btn">
               <img src={shopIcon} alt='home' />
             </button>
+            </Link>
           </div>
           <div className="bottom-menu_center-div"></div>
         </div>

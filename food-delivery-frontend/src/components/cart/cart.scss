@@ -1,0 +1,107 @@
+@use '../../assets/scss/base.scss';
+
+.orderItem-header {
+  @include base.flex($justify-content: space-around);
+  margin-top: 29px;
+
+  h2 {
+    width: calc(40.5vw);
+    @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+  }
+}
+
+.orderItem {
+  margin: 31px auto 0 auto;
+  width: calc(80.5vw);
+  height: calc(12.8vh);
+  @include base.flex($justify-content: space-around);
+  background-color: base.$primary-color-white;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+
+
+  &_dish-count {
+    width: 105px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgba(253, 194, 122, 0.1);
+    @include base.flex($justify-content: space-around);
+    @include base.font($font-size: 16px, $font-weight: 700, $line-height: 24px, $color: base.$primary-color-dark-green);
+
+    button {
+      @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      @include base.flex();
+      width: 26px;
+      height: 26px;
+      border-radius: 50px;
+      background-color: base.$primary-color-peachy;
+    }
+  }
+
+  &_image {
+    width: calc(18.7wv);
+    height: calc(8.9vh);
+    border-radius: 20px;
+  }
+
+  &_info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    h3 {
+      @include base.font($font-size: 16px, $font-weight: 700, $line-height: 24px, $color: base.$primary-color-dark-green);
+      max-width: calc(25vw);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    h4 {
+      @include base.font($font-size: 12px, $font-weight: 300, $line-height: 18px, $color: base.$primary-color-olive);
+
+      span {
+        @include base.font($font-size: 15px, $font-weight: 700, $line-height: 23px, $color: base.$primary-color-dark-green);
+      }
+    }
+
+    p {
+      @include base.font($font-size: 10px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-green);
+      max-width: calc(20vw);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+.promocode-container {
+  width: calc(80.5vw);
+  position: relative;
+  margin: 103px auto 0 auto;
+  input{
+    box-sizing: border-box;
+    background-color: base.$primary-color-white;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    width: calc(80.5vw);
+    height:calc(7vh);
+    position: relative;
+    border: none;
+    padding-left: 55px;
+  }
+  button{
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    background-color: base.$primary-color-peachy;
+    border-radius: 10px;
+    @include base.font($font-size: 13px, $font-weight: 600, $line-height: 28px, $color: base.$primary-color-dark-green);
+  }
+  img{
+    position: absolute;
+    left: 21px;
+    top: 17px;
+    bottom: 16px;
+  }
+}
