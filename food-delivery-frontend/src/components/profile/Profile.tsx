@@ -8,6 +8,7 @@ import Payment from './payment/Payment';
 // imports and variables for stripe
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Account from './account/Account';
 const stripePromise: Promise<Stripe | null> = loadStripe('process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!');
 
 const Profile = () => {
@@ -41,7 +42,7 @@ const Profile = () => {
           </div>
         </div>
         <div className='profile_header-btns'>
-          <Link to="profile"><button type='button'>Account</button></Link>
+          <Link to="account"><button type='button'>Account</button></Link>
           <Link to="payment"><button type='button'>Payment</button></Link>
           <Link to="history"><button type='button'>History</button></Link>
         </div>
@@ -49,6 +50,7 @@ const Profile = () => {
       <div>
       <Elements stripe={stripePromise}>
         <Routes>
+          <Route path='/account' element={<Account />} />
           <Route path='/history' element={<History />} />
           <Route path='/payment' element={<Payment />} />
         </Routes>

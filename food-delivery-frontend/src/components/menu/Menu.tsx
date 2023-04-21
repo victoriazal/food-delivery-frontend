@@ -4,9 +4,7 @@ import promotionPhoto from '../../assets/images/image_shopping_app.png';
 import filterBtn from '../../assets/images/filter.png';
 import searchBtn from '../../assets/images/searchBtn.png';
 import { Dish } from '../home/Home';
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { instance } from '../../assets/axios';
 import { like } from '../../store/slice/favourite';
 import { RootState } from '../../store/store';
 import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png'

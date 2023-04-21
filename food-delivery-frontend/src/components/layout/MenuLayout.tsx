@@ -35,7 +35,7 @@ const MenuLayout = () => {
               <Link to="home"> <img src={homeIcon} alt='home' /></Link>
             </li>
             <li>
-              <Link to="menu"> <img src={menuIcon} alt='home' /></Link>
+              <Link to="menu"> <img src={menuIcon} alt='menu' /></Link>
             </li>
           </ul>
         </div>
@@ -43,7 +43,7 @@ const MenuLayout = () => {
           <div className="circle-wrapper">
             <Link to="cart">
               <button className="bottom-menu_center-btn">
-                <img src={shopIcon} alt='home' />
+                <img src={shopIcon} alt='cart' />
               </button>
             </Link>
           </div>
@@ -52,10 +52,10 @@ const MenuLayout = () => {
         <div className="bottom-menu_right-side">
           <ul>
             <li>
-              <Link to="notifications"><img src={notificIcon} alt='home' /></Link>
+              <Link to="notifications"><img src={notificIcon} alt='notifications' /></Link>
             </li>
             <li>
-              <Link to="profile"><img src={profileIcon} alt='home' /></Link>
+              <Link to="profile/account"><img src={profileIcon} alt='profile' /></Link>
             </li>
           </ul>
         </div>
