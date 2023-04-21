@@ -19,7 +19,7 @@
       left: 34px;
       bottom: 10px;
     }
-
+    
     &-filterBtn {
       width: 40px;
       height: 40px;
@@ -40,6 +40,10 @@
       @include base.font($font-size: 14px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
     }
 
+    input[type="search"]::-webkit-search-cancel-button{
+      display: none;
+    };
+
     &-options {
       height: 0;
       visibility: hidden;
@@ -47,7 +51,10 @@
       opacity: 0;
       overflow-x: scroll;
       margin-top: calc(4.5vh);
-    
+      ::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+      }
       ul {
         display: flex;
         overflow-x: auto;
@@ -65,6 +72,9 @@
         background: base.$primary-color-white;
         box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
         border-radius: 20px;
+      }
+      .selected{
+        background-color: base.$primary-color-peachy;
       }
     }
   }
@@ -138,6 +148,7 @@
     }
 
     .add-to-cart-btn {
+      z-index: 3;
       width: calc(26.6vw);
       height: calc(3vh);
       background-color: base.$primary-color-peachy;

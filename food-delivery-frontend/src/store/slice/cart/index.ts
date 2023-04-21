@@ -6,6 +6,9 @@ interface CartItem {
   name: string;
   shortDescription: string;
   price: string;
+  about: string;
+  rating: string;
+  time: string;
 }
 
 interface CartState {
@@ -21,7 +24,10 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<CartItem>) => {
-      state.items.push(action.payload);
+      if (!state.items.includes(action.payload)) {
+        state.items.push(action.payload)
+      };
+      console.log(state)
     },
     removeItem: (state, action: PayloadAction<number>) => {
       const index = state.items.findIndex((item) => item.id === action.payload);

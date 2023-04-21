@@ -4,8 +4,8 @@ import showPasswordIcon from '../../../assets/images/show-password-eye.png'
 import { useState } from 'react';
 import { instance } from '../../../assets/axios';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../assets/hook';
 import { login } from '../../../store/slice/auth';
+import { useAppDispatch } from '../../../assets/hooks/hooks';
 
 const SignUp = () => {
   const [email,setEmail] = useState('')

@@ -1,11 +1,14 @@
+import { AsyncLocalStorage } from "async_hooks";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom"
-import { useAuth } from "../hook"
+import { RootState } from "../../store/store";
 
 const PrivateRoute = ()=>{
-  const auth = useAuth()
+  const isLogged: boolean = useSelector((state: RootState) => state.auth.isLogged);
+  const isReallyLogged = localStorage.getItem("isLogged")
   return(
-    auth ?  <Outlet/> : <Navigate to="login" />
+    isReallyLogged ? <Outlet/> : <Navigate to="login" />
   )
 }
 
-export default PrivateRoute
+export default PrivateRoute 
