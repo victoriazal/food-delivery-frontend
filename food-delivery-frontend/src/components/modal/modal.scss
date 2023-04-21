@@ -1,0 +1,141 @@
+@use '../../assets/scss/base.scss';
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: base.$primary-background-light;
+  position: fixed;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  transition: 0.5s;
+
+  &_content {
+    background-color: base.$primary-background-light;
+    width: calc(84.5vw);
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+    &_dish-image {
+      width: calc(84.5vw);
+      height: 296px;
+      border-radius: 0 0 0 40px;
+    }
+
+    &_dish-info {
+      background-color: base.$primary-color-white;
+      border-radius: 40px 0 0 0;
+      position: absolute;
+      height: calc(54.2vh);
+      width: calc(84.5vw);
+      bottom: 0;
+      right: 0;
+      box-sizing: border-box;
+      padding: 22px 20px 37px 28px;
+
+      &_header {
+        @include base.flex;
+
+        h4 {
+          @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+        }
+
+        h3 {
+          @include base.font($font-size: 12px, $font-weight: 300, $line-height: 18px, $color: base.$primary-color-olive);
+
+          span {
+            @include base.font($font-size: 24px, $font-weight: 700, $line-height: 23px, $color: base.$primary-color-dark-green);
+          }
+        }
+
+        h5 {
+          @include base.font($font-size: 14px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+        }
+      }
+
+      &_rate-n-time {
+        display: flex;
+        img{
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+          border-radius: 10px;
+          padding: 6px;
+          margin: 7px;
+        }
+        span {
+          @include base.font($font-size: 16px, $font-weight: 500, $line-height: 24px, $color: base.$primary-color-dark-green);
+        }
+      }
+
+      &_rate{
+        @include base.flex;
+        img{background-color: #FFF9DD;}
+      }
+      &_time{
+        @include base.flex;
+        img{background-color: #E0DEE3;}
+      }
+      &_about {
+        padding-top: 30px;
+        overflow: scroll;
+        height: calc(17.7vh);
+        text-overflow: ellipsis;
+
+        h4 {
+          @include base.font($font-size: 18px, $font-weight: 700, $line-height: 27px, $color: base.$primary-color-dark-green);
+        }
+
+        p {
+          @include base.font($font-size: 14px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+        }
+      }
+    }
+
+    .modal_content_btns {
+      display: flex;
+      padding-top: 35px;
+
+      &-quantity {
+        width: 105px;
+        height: 35px;
+        border-radius: 20px;
+        background-color: rgba(253, 194, 122, 0.1);
+        @include base.flex($justify-content: space-around);
+        @include base.font($font-size: 16px, $font-weight: 700, $line-height: 24px, $color: base.$primary-color-dark-green);
+
+        button {
+          @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+          @include base.flex();
+          width: 26px;
+          height: 26px;
+          border-radius: 50px;
+          background-color: base.$primary-color-peachy;
+        }
+      }
+
+      &-cart {
+        width: 111px;
+        height: 40px;
+        background-color: base.$primary-color-peachy;
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        @include base.font($font-size: 11px, $font-weight: 700, $line-height: 28px, $color: base.$primary-color-dark-green);
+      }
+    }
+
+  }
+
+  &_content.active {
+    transform: scale(1);
+  }
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}

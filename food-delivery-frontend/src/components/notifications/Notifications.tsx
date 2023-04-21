@@ -5,6 +5,10 @@ const Notifications = () => {
       <h3>Notification</h3>
       <div className='notifications'>
         <div className='notifications-card'>
+          <div>
+            <img/>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>

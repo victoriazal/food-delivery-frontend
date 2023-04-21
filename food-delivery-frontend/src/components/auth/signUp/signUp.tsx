@@ -4,8 +4,8 @@ import showPasswordIcon from '../../../assets/images/show-password-eye.png'
 import { useState } from 'react';
 import { instance } from '../../../assets/axios';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../assets/hook';
 import { login } from '../../../store/slice/auth';
+import { useAppDispatch } from '../../../assets/hooks/hooks';
 
 const SignUp = () => {
   const [email,setEmail] = useState('')
@@ -14,11 +14,13 @@ const SignUp = () => {
   const [username,setUsername] = useState('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
-  const toggleShowPassword = (input:string)=>{
+// show and hide password
+  const toggleShowPassword = (e:{preventDefault:()=> void},input:string)=>{
       let myInput = document.getElementById(input) as HTMLInputElement
       myInput!.type === "password" ? myInput!.type = "text":myInput!.type = "password"
   }
+
+  // signUp logic
   const handleSignUp = async(e:{preventDefault:()=> void;})=>{
     if(password===confirmPassword){
       e.preventDefault()
@@ -59,14 +61,14 @@ const SignUp = () => {
               <p>Password</p>
               <div>
               <input onChange={(e)=>{setPassword(e.target.value)}} type="password" name="password" id="signUpPassword" />
-              <button type='button' onClick={()=>{toggleShowPassword("signUpPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
+              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
               </div>
             </div>
             <div className='signUp-form__password'>
               <p>Confirm</p>
               <div>
               <input onChange={(e)=>{setConfirmPassword(e.target.value)}}  type="password" name="password" id="signUpConfirmPassword" />
-              <button type='button' onClick={()=>{toggleShowPassword("signUpConfirmPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
+              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpConfirmPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
               </div>
             </div>
             <div className='signUp-form__button'>

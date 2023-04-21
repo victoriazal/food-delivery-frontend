@@ -1,10 +1,84 @@
-$primary-color-white: #FFFFFF;
-$primary-background-light: #F2F6F7;
-$primary-color-dark-green:#104E5B;
-$primary-color-dark:#2B2D33;
-$primary-color-dark-light:#616F80;
-$primary-color-peachy: #FDC27A;
-$primary-color-peachy-light:#FFE3C0;
+  $primary-color-white: #FFFFFF;
+  $primary-background-light: #F2F6F7;
+  $primary-color-dark-green:#104E5B;
+  $primary-color-dark:#2B2D33;
+  $primary-color-dark-light:#616F80;
+  $primary-color-peachy: #FDC27A;
+  $primary-color-peachy-light:#FFE3C0;
+  $primary-color-olive: #99C932;
+
+  // Common styles for both themes
+  :root[data-theme="light"] {
+    --background-color:#F2F6F7;
+  }
+  
+  :root[data-theme="dark"] {
+    --background-color: #232033;
+    .dish,.bottom-menu_right-side,
+    .bottom-menu_left-side,
+    .bottom-menu_center-div,
+    .circle-wrapper,
+    .profile_header,.modal_content_dish-info
+    {
+      background-color: #26273B;
+    }
+    .modal,.modal_content{
+      background-color:#232033;
+      h4,h3,span{
+        color: #D1D1D1;
+      }
+    }
+    
+    .dish{
+      h4{
+        color: #D1D1D1;
+      }
+      h3{
+        span{
+          color: #D1D1D1;
+        }
+      }
+    }
+    .home-page_header,.menu-page_header,.notifications-page,.toggle-theme-wrapper{
+      h3{
+        color: $primary-color-peachy;
+      }
+      .profile-link{
+        border: 0.5px solid $primary-color-peachy;
+      }
+    }
+
+    
+  }
+  
+  body {
+    background: var(--background-color);
+  }
+$button-color: #000000;
+
+// Light Theme Styles
+.light-theme {
+  $primary-color-white: #FFFFFF;
+  $primary-background-light: #F2F6F7;
+  $primary-color-dark-green:#104E5B;
+  $primary-color-dark:#2B2D33;
+  $primary-color-dark-light:#616F80;
+  $primary-color-peachy: #FDC27A;
+  $primary-color-peachy-light:#FFE3C0;
+  $primary-color-olive: #99C932;
+}
+
+// Dark Theme Styles
+.dark-theme {
+  $primary-color-white: #180f0f;
+  $primary-background-light: #121515;
+  $primary-color-dark-green:#104E5B;
+  $primary-color-dark:#2B2D33;
+  $primary-color-dark-light:#616F80;
+  $primary-color-peachy: #FDC27A;
+  $primary-color-peachy-light:#FFE3C0;
+  $primary-color-olive: #99C932;
+}
 
 // google fonts
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;0,800;1,200;1,400;1,500&display=swap');
@@ -17,8 +91,8 @@ $primary-color-peachy-light:#FFE3C0;
   color: $color;
 }
 
-@mixin flex($display:flex,$justify-content:center,$alighn-items:center) {
+@mixin flex($display:flex,$justify-content:center,$align-items:center) {
   display: $display;
   justify-content: $justify-content;
-  align-items: $alighn-items;
+  align-items: $align-items;
 }

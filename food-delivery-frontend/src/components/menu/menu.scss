@@ -1,11 +1,77 @@
 @use '../../assets/scss/base.scss';
 
 .menu-page {
-  ul {
-    display: flex;
-    list-style: none;
+  &_dishes-wrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: calc(3.9vh);
+    padding-bottom: 50px;
+  }
+  &_filter {
+    margin-top: calc(3.9vh);
+    position: relative;
+    @include base.flex($justify-content: space-around);
+    input {
+      box-sizing: border-box;
+      background: base.$primary-color-white;
+      border: none;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
+      border-radius: 20px;
+      width: calc(64.3vw);
+      height: calc(5vh);
+      padding-left: 50px;
+      
+      @include base.font($font-size: 14px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+    }
+   &-searchBtn {
+      position: absolute;
+      top: 10px;
+      left: 34px;
+    }
+    &-filterBtn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      background-color: base.$primary-color-peachy;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+    }
+    &-options {
+      height: 0;
+      visibility: hidden;
+      transition: opacity 1s ease-out;
+      opacity: 0;
+      overflow-x: scroll;
+      margin-top: calc(4.5vh);
+    
+      ul {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      li {
+        flex: 0 0 auto;
+        width: 90px;
+        margin-right: 10px;
+        padding: 6px 20px;
+        @include base.flex;
+        height: calc(3.8vh);
+        @include base.font($font-size: 10px, $font-weight: 600, $line-height: 28px, $color: base.$primary-color-dark-green);
+        background: base.$primary-color-white;
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
+        border-radius: 20px;
+      }
+    }
   }
 
+  .show-options {
+    visibility: visible;
+    display: block;
+    height: max-content;
+    opacity: 1;
+  }
+
+ 
   &_header {
     @include base.flex($justify-content: space-between);
 
@@ -27,6 +93,7 @@
   .promotion {
     background-color: base.$primary-color-peachy-light;
     width: calc(77vw);
+    max-width: 500px;
     height: calc(18.4vh);
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
     border-radius: 25px;
@@ -45,6 +112,80 @@
     }
     h5{
       @include base.font($font-size: 11px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+    }
+
+  }
+
+  .dish {
+    margin: 0 auto calc(3.2vh) auto;
+    grid-column-start: auto;
+    width: calc(34.6vw);
+    height: calc(25.48vh);
+    background-color: base.$primary-color-white;
+    @include base.flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 0px 20px;
+    box-sizing: border-box;
+
+    &-image {
+      position: relative;
+      width: calc(29.6vw);
+      height: calc(11.1vh);
+      border-radius: 0px 15px;
+      box-shadow:0px 4px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    &-image-container {
+  
+      position: relative;
+      height: calc(11.1vh);
+    }
+
+    .like-btn {
+      background: rgba(253, 194, 122, 0.9);
+      border-radius: 10px 0px 0px 0px;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      &-img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    h4 {
+      max-width: calc(30vw);
+      @include base.font($font-size: 14px, $font-weight: 700, $line-height: 21px, $color: base.$primary-color-dark-green);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    h3 {
+      @include base.font($font-size: 12px, $font-weight: 300, $line-height: 18px, $color: base.$primary-color-olive);
+
+      span {
+        @include base.font($font-size: 15px, $font-weight: 700, $line-height: 23px, $color: base.$primary-color-dark-green);
+      }
+    }
+
+    span {
+      @include base.font($font-size: 8px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+    }
+
+    .add-to-cart-btn {
+      z-index: 3;
+      width: calc(26.6vw);
+      height: calc(3vh);
+      background-color: base.$primary-color-peachy;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 0px 15px;
+      @include base.flex;
+      @include base.font($font-size: 8px, $font-weight: 600, $line-height: 28px, $color: base.$primary-color-dark-green);
     }
   }
 }

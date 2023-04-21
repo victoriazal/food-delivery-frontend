@@ -1,8 +1,5 @@
 @use '../../../assets/scss/base.scss';
 
-body {
-  background-color: base.$primary-background-light;
-}
 
 button {
   background: transparent;
@@ -10,6 +7,9 @@ button {
 }
 
 .logIn {
+  input:focus{
+    outline: none;
+  }
   &__header {
     display: flex;
     flex-direction: column;
@@ -76,6 +76,7 @@ button {
     }
 
     input {
+      @include base.font($font-size: 14px, $font-weight: 500, $line-height: 28px, $color: base.$primary-color-dark-green);
       border: none;
       border-bottom: 1px solid #104E5B;
       background-color: transparent;

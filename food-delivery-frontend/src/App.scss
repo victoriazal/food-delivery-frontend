@@ -1,6 +1,15 @@
+@use './assets/scss/base.scss';
+
 *{
   margin: 0;
+  input:focus{
+    outline: none;
+  }
 }
 button{
   cursor: pointer;
+}
+
+body {
+  background-color: black;
 }
