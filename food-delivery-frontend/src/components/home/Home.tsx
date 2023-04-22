@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import filterBtn from '../../assets/images/filter.png';
 import searchBtn from '../../assets/images/searchBtn.png';
 import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png';
+import likedBtn from '../../assets/images/menu-icons/ic_favorite_selected.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../store/slice/cart/index';
 import ModalDish from '../modal/Modal';
@@ -29,6 +30,7 @@ type cartDataObj = {
   price: string;
 }
 
+
 const Home = () => {
   const dispatch = useDispatch();
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -52,25 +54,44 @@ const Home = () => {
   };
 
   // add to favourites
+  
+type FavoriteDish = {
+    id: number;
+    image: string;
+    name: string;
+    shortDescription: string;
+    price: string;
+    about: string;
+    rating: string;
+    time: string;
+} 
+const [favoriteDishes, setFavoriteDishes] = useState<FavoriteDish[]>([]);
+const userDataObj = JSON.parse(localStorage.getItem("user") ?? "");
+useEffect(() => {
+  const fetchFavouriteDishes = async () => {
+    try {
+      const response = await instance.get(`http://localhost:5000/user/${userDataObj.id}/favorite-dishes`);
+      setFavoriteDishes(response.data.map((elem: { dish: FavoriteDish }) => elem.dish));
+      console.log(favoriteDishes)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchFavouriteDishes();
+},[]);
+
   const handleLike = async (liked: Dish) => {
     dispatch(like(liked));
     try {
-      const userString = localStorage.getItem("user");
-      if (userString !== null) {
-        const user = JSON.parse(userString);
-        console.log(user)
         const likedDishData = {
-          userId: user.id,
+          userId: userDataObj.id,
           dishId: liked.id,
         };
         await instance.post<{ data: any }>('http://localhost:5000/user/like', likedDishData);
-      }
     } catch (error) {
       console.log(error);
     }
   };
-  
-
 
     // combine all tags from dishes short description
     const filterOptionsArray = Array.from(new Set(dishes.flatMap(dish => dish.shortDescription.split(','))));
@@ -114,12 +135,13 @@ const Home = () => {
         }
         return searchInput.some(search => dish.name.includes(search));
       })
-      .map(dish => (
+      .map(dish => {
+        return(
         <div className="dish" key={dish.name}>
           <div className="dish-image-container">
             <img onClick={(e) => { setModalActive(true); setSelectedDish(dish) }} className="dish-image" src={`http://localhost:5000/dish/${dish.image}`} alt={dish.name} />
             <button onClick={() => handleLike(dish)} className="like-btn">
-              <img className="like-btn-img" src={unlikedBtn} alt="like button" />
+              <img className="like-btn-img" src={favoriteDishes.some((favDish) => favDish.id === dish.id)?likedBtn:unlikedBtn} alt="like button"/>
             </button>
           </div>
           <h4 onClick={() => { setModalActive(true); setSelectedDish(dish) }}>{dish.name}</h4>
@@ -130,8 +152,8 @@ const Home = () => {
           <button disabled={cart.includes(dish) ? true : false} onClick={() => handleAddToCart(dish)} className="add-to-cart-btn">
             {cart.includes(dish) ? "Added" : "Add to cart"}
           </button>
-        </div>
-      ));
+        </div>)
+});
 
     return (
       <div className="home-page">

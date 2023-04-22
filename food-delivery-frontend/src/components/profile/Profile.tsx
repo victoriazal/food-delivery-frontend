@@ -12,12 +12,8 @@ import Account from './account/Account';
 const stripePromise: Promise<Stripe | null> = loadStripe('process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!');
 
 const Profile = () => {
-  type userDataObj = {
-    username?: string,
-    id?: number,
-    email?: string
-  }
-  const userData: userDataObj = store.getState().auth.user
+
+  const userDataObj = JSON.parse(localStorage.getItem("user") ?? "");
   const handleThemeToggle = () => {
     const currentTheme = document.documentElement.getAttribute('data-theme')
     console.log(currentTheme)
@@ -36,9 +32,9 @@ const Profile = () => {
         <div className='profile_header-data'>
           <button className='profile__header-photo' ><img alt='add profile pic' src={addPhoto} /></button>
           <div>
-            <h3>{userData.username}</h3>
-            <h4>{userData.email}</h4>
-            <h4>User ID : {userData.id}</h4>
+            <h3>{userDataObj?.username}</h3>
+            <h4>{userDataObj?.email}</h4>
+            <h4>User ID : {userDataObj?.id}</h4>
           </div>
         </div>
         <div className='profile_header-btns'>
