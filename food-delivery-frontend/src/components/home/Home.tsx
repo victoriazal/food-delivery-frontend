@@ -20,7 +20,7 @@ export interface Dish {
 }
 
 const Home = () => {
-  // using hook here
+  // using hooks here
   const { favoriteDishes, handleLike, dishes, cart, handleAddToCart } = useFavoriteDishesAndCart();
   const {selectedFilters,handleFilterOption,showFilterOptions} = useFilter()
 

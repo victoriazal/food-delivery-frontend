@@ -4,6 +4,11 @@
   &-container {
     overflow: scroll;
     height: calc(45vh);
+    &_no-orders{
+      @include base.flex;
+      margin-top: 60px;
+      @include base.font($font-size: 14px, $font-weight: 400, $line-height: 36px, $color: base.$primary-color-dark-green);
+    }
   }
 
   &-header {
@@ -81,7 +86,7 @@
   }
 }
 
-.proba {
+.promocode-wrapper{
   box-sizing: border-box;
   position: fixed;
   bottom: 26px;
