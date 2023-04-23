@@ -69,19 +69,24 @@ const [dishes, setDishes] = useState<Dish[]>([]);
     // retriving our cart and checking if the cart arleady has the dish in it, if not -add to the cart
     const dispatch = useDispatch();
     const cart: cartDataObj[] = useSelector((state: RootState) => state.cart.items);
-    const handleAddToCart = (dish: Dish) => {
+    const handleAddToCart = (dish: Dish | null) => {
+      if(!dish){
+        return
+      }
       if (!cart.includes(dish)) {
         dispatch(addItem(dish));
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-    };
 
+      }
+    };
     const handleRemoveItem = (itemId: number) => {
       dispatch(removeItem(itemId));
+
     };
-// // update local storage whenever the cart state changes
-//   useEffect(() => {
-//     localStorage.setItem('cart', JSON.stringify(cart));
-//   }, [cart]);
+
+    
+// update local storage whenever the cart state changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
   return { favoriteDishes, handleLike,dishes,cart,handleAddToCart,handleRemoveItem };
 };

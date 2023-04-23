@@ -7,6 +7,7 @@ import './modal.scss'
 import { Dish } from '../home/Home';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { useFavoriteDishesAndCart } from '../../assets/hooks/favoriteDishesAndCartHook';
 
 interface ModalDishProps {
   active: boolean;
@@ -38,7 +39,11 @@ const ModalDish: FC<ModalDishProps> = ({ active, setActive, selectedDish }) => {
       return newAmounts;
     });
   };
+
+  // import hooks
+  const {handleLike,handleAddToCart,cart} = useFavoriteDishesAndCart()
   return (
+
     <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
       <div className={active ? "modal_content active" : "modal_content"} onClick={e => e.stopPropagation()}>
         <img className="modal_content_dish-image" src={selectedDish ? `http://localhost:5000/dish/${selectedDish?.image}` : starIcon} alt='ok' />
@@ -75,7 +80,9 @@ const ModalDish: FC<ModalDishProps> = ({ active, setActive, selectedDish }) => {
               <span>{amounts[selectedDish ? selectedDish?.id : 1]}</span>
               <button type="button" onClick={() => { changeQuantity(selectedDish ? selectedDish?.id : 1, +1) }}>+</button>
             </div>
-            <button className='modal_content_btns-cart'>Add to cart</button>
+            <button disabled={cart.some((elem) => elem.id === selectedDish?.id)? true : false} onClick={() => handleAddToCart(selectedDish)}className='modal_content_btns-cart'>
+            {cart.some((elem) => elem.id === selectedDish?.id) ? "Added" : "Add to cart"}
+          </button>
           </div>
         </div>
       </div>

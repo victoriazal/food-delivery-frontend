@@ -6,9 +6,6 @@ import './cart.scss'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useFavoriteDishesAndCart } from "../../assets/hooks/favoriteDishesAndCartHook";
-
-
-
 const Cart = () => {
   type cartDataObj = {
     id: number;
@@ -22,6 +19,7 @@ const Cart = () => {
 
   const [cart, setCart] = useState<cartDataObj[]>([]);
   const dishes: cartDataObj[] = useSelector((state: RootState) => state.cart.items);
+  
   useEffect(() => {
     const cartData = localStorage.getItem('cart');
     if (cartData) {
@@ -106,7 +104,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="confirm-order-btn">
-          <button >CONFIRM ORDER</button>
+          <button onClick={()=>navigate('/notifications')} >CONFIRM ORDER</button>
         </div>
       </div>
     </div>

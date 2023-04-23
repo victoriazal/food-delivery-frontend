@@ -22,7 +22,7 @@ export interface Dish {
 const Home = () => {
   // using hooks here
   const { favoriteDishes, handleLike, dishes, cart, handleAddToCart } = useFavoriteDishesAndCart();
-  const {selectedFilters,handleFilterOption,showFilterOptions} = useFilter()
+  const { selectedFilters, handleFilterOption, showFilterOptions } = useFilter()
 
   //  modal window state and logic
   const [modalActive, setModalActive] = useState(false)
@@ -64,8 +64,8 @@ const Home = () => {
           <h3>
             $<span>{dish.price}</span>
           </h3>
-          <button disabled={cart.includes(dish) ? true : false} onClick={() => handleAddToCart(dish)} className="add-to-cart-btn">
-            {cart.includes(dish) ? "Added" : "Add to cart"}
+          <button disabled={cart.some((elem) => elem.id === dish.id)? true : false} onClick={() => handleAddToCart(dish)} className="add-to-cart-btn">
+            {cart.some((elem) => elem.id === dish.id) ? "Added" : "Add to cart"}
           </button>
         </div>)
     });

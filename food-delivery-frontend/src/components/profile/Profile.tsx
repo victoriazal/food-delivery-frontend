@@ -1,6 +1,5 @@
 import './profile.scss';
 import addPhoto from '../../assets/images/add_a_photo.png'
-import store from '../../store/store';
 import { Link, Route, Routes} from 'react-router-dom';
 import History from './history/History';
 import Payment from './payment/Payment';
@@ -15,8 +14,7 @@ const Profile = () => {
 
   const userDataObj = JSON.parse(localStorage.getItem("user") ?? "");
   const handleThemeToggle = () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme')
-    console.log(currentTheme)
+    const currentTheme = document.documentElement.getAttribute('data-theme') 
     currentTheme === "dark" ? document.documentElement.setAttribute('data-theme', 'light') : document.documentElement.setAttribute('data-theme', 'dark')
   };
   return (
