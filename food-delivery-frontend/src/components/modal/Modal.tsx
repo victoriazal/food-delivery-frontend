@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
-import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png'
+import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png';
 import starIcon from '../../assets/images/star.png';
 import timeIcon from '../../assets/images/time.png';
-
+import likedBtn from '../../assets/images/menu-icons/ic_favorite_selected.png';
 import './modal.scss'
 import { Dish } from '../home/Home';
 import { useSelector } from 'react-redux';
@@ -41,14 +41,14 @@ const ModalDish: FC<ModalDishProps> = ({ active, setActive, selectedDish }) => {
   };
 
   // import hooks
-  const {handleLike,handleAddToCart,cart} = useFavoriteDishesAndCart()
+  const {handleLike,handleAddToCart,cart,favoriteDishes} = useFavoriteDishesAndCart()
   return (
 
     <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
       <div className={active ? "modal_content active" : "modal_content"} onClick={e => e.stopPropagation()}>
         <img className="modal_content_dish-image" src={selectedDish ? `http://localhost:5000/dish/${selectedDish?.image}` : starIcon} alt='ok' />
-        <button className="like-btn">
-          <img className="like-btn-img" src={unlikedBtn} alt="like button" />
+        <button onClick={()=>(selectedDish)?handleLike(selectedDish): console.log("can't add to favorite")} className="modal_content_dish-image_like-btn" >
+          <img className="like-btn-img"  src={favoriteDishes.some((favDish) => favDish.id === selectedDish?.id) ? likedBtn : unlikedBtn} alt="like button" />
         </button>
         <div className='modal_content_dish-info'>
           <div className='modal_content_dish-info_header'>

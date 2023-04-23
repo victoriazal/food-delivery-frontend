@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { instance } from '../../../assets/axios';
 import './account.scss'
 const Account = () => {
   const navigate = useNavigate()
@@ -7,6 +6,7 @@ const Account = () => {
   const handleLogOut =  ()=>{
     localStorage.removeItem('user');
     localStorage.removeItem('isLogged');
+    localStorage.removeItem('courier');
     navigate('/login')
   }
   return (

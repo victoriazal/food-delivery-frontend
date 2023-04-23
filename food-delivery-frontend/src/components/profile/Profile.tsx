@@ -8,14 +8,23 @@ import Payment from './payment/Payment';
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Account from './account/Account';
+import { useEffect } from 'react';
 const stripePromise: Promise<Stripe | null> = loadStripe('process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!');
 
 const Profile = () => {
-
   const userDataObj = JSON.parse(localStorage.getItem("user") ?? "");
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") ?? "dark";
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    if(storedTheme==="dark" ){
+      document.getElementById("darkmode-toggle")?.setAttribute("checked","checked")}
+  }, []);
+  
   const handleThemeToggle = () => {
     const currentTheme = document.documentElement.getAttribute('data-theme') 
-    currentTheme === "dark" ? document.documentElement.setAttribute('data-theme', 'light') : document.documentElement.setAttribute('data-theme', 'dark')
+    const updatedTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute('data-theme', updatedTheme);
+    localStorage.setItem("theme", updatedTheme);
   };
   return (
     <div className="profile">

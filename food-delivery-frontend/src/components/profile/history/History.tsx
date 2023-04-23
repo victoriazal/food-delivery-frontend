@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import { instance } from "../../../assets/axios";
-
+import './history.scss'
 const History = () => {
-
   return (
-      <div>
-        <h1>History bitch</h1>
+      <div className="history">
+        <h2>history supposed to be here, but unfortunatelly she is out somewhere</h2>
       </div>
   );
 }

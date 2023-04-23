@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addItem, removeItem } from '../../store/slice/cart';
+import { addItem, clearCart, removeItem } from '../../store/slice/cart';
 import { RootState } from '../../store/store';
 import { instance } from '../axios';
 
@@ -76,7 +76,6 @@ export const useFavoriteDishesAndCart = () => {
     }
     if (!cart.includes(dish)) {
       dispatch(addItem(dish));
-
     }
   };
   const handleRemoveItem = (itemId: number) => {
@@ -86,15 +85,16 @@ export const useFavoriteDishesAndCart = () => {
   const navigate = useNavigate()
   const handleConfirmOrder = () => {
     localStorage.setItem('order', JSON.stringify(cart));
-  
+
     // Choose a random courier from the couriers array
     const randomIndex = Math.floor(Math.random() * couriers.length);
     const randomCourier = couriers[randomIndex];
     setRandomCourier(randomCourier);
     localStorage.setItem('courier', JSON.stringify(randomCourier));
+    // Clear the cart
+    dispatch(clearCart());
     navigate('/notifications');
   }
-
 
   // notifications and couriers
 
@@ -103,11 +103,8 @@ export const useFavoriteDishesAndCart = () => {
     id: number;
     image: string;
     name: string;
-    shortDescription: string;
-    price: string;
-    about: string;
-    rating: string;
     time: string;
+    phone: string;
   }
   const [couriers, setCouriers] = useState<Courier[]>([]);
   const [randomCourier, setRandomCourier] = useState<Courier | undefined>();
@@ -115,7 +112,6 @@ export const useFavoriteDishesAndCart = () => {
     instance.get<Courier[]>('http://localhost:5000/courier/all')
       .then((response) => {
         setCouriers(response.data);
-
       })
       .catch((error) => {
         console.log(error);

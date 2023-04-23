@@ -1,0 +1,10 @@
+@use '../../../assets/scss/base.scss';
+
+.history{
+  @include base.flex;
+  h2{
+    width: calc(70vw);
+    @include base.font($font-size: 14px, $font-weight: 700, $line-height: 24px, $color: base.$primary-color-peachy);
+    text-align: center;
+   }
+}
