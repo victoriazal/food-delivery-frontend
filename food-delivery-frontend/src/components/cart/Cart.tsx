@@ -14,7 +14,7 @@ const Cart = () => {
     shortDescription: string;
     price: string;
   }
-  const { handleRemoveItem } = useFavoriteDishesAndCart()
+  const { handleRemoveItem,handleConfirmOrder } = useFavoriteDishesAndCart()
   const navigate = useNavigate()
 
   const [cart, setCart] = useState<cartDataObj[]>([]);
@@ -104,7 +104,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="confirm-order-btn">
-          <button onClick={()=>navigate('/notifications')} >CONFIRM ORDER</button>
+          <button onClick={handleConfirmOrder}>CONFIRM ORDER</button>
         </div>
       </div>
     </div>

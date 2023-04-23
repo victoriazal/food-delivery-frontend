@@ -7,7 +7,7 @@ import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.pn
 import likedBtn from '../../assets/images/menu-icons/ic_favorite_selected.png';
 import ModalDish from '../modal/Modal';
 import { useFavoriteDishesAndCart } from '../../assets/hooks/favoriteDishesAndCartHook';
-import { useFilter } from '../../assets/hooks/filterHook';
+import {useFilter} from '../../assets/hooks/filterHook';
 export interface Dish {
   id: number;
   image: string;

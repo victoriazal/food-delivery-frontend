@@ -1,22 +1,95 @@
 @use '../../assets/scss/base.scss';
 
 .notifications-page {
+  .no-orders{
+    @include base.flex;
+    margin-top: 60px;
+    @include base.font($font-size: 14px, $font-weight: 400, $line-height: 36px, $color: base.$primary-color-dark-green);
+  }
+  &_header {
+    width: calc(43.4vw);
+    margin: 29px 0 0 23px;
+    @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+  }
+
   .notifications {
     margin-top: 44px;
     @include base.flex;
 
     &-card {
+      box-sizing: border-box;
       background-color: base.$primary-color-white;
       width: calc(80.5vw);
-      height: calc(17.3vh);
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.01);
       border-radius: 20px;
-    }
-  }
 
-  h3 {
-    width: calc(43.4vw);
-    margin: 29px 0 0 23px;
-    @include base.font($font-size: 24px, $font-weight: 700, $line-height: 36px, $color: base.$primary-color-dark-green);
+      &_courier-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 12px 17px 13px 15px;
+      }
+
+      &_img {
+        width: 50px;
+        height: 50px;
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+      }
+
+      &_courier-info {
+        padding: 0 15px;
+
+        h3 {
+          width: calc(39.2vw);
+          @include base.font($font-size: 14px, $font-weight: 700, $line-height: 21px, $color: base.$primary-color-dark-green);
+        }
+
+        h4 {
+          @include base.font($font-size: 12px, $font-weight: 400, $line-height: 28px, $color: base.$primary-color-dark-light);
+        }
+
+        span {
+          @include base.font($font-size: 11px, $font-weight: 600, $line-height: 28px, $color: base.$primary-color-dark-very-light);
+        }
+      }
+
+      &_call-courier {
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+        background-color: base.$primary-color-peachy;
+        width: 45px;
+        height: 45px;
+      }
+
+      &_delivery {
+        @include base.flex;
+
+        &_time,
+        &_location {
+          padding: 13px 10px 16px 10px;
+          @include base.flex($justify-content:none);
+
+          h4 {
+            @include base.font($font-size: 9px, $font-weight: 600, $line-height: 14px, $color: base.$primary-color-dark-green);
+          }
+
+          span {
+            @include base.font($font-size: 8px, $font-weight: 500, $line-height: 28px, $color: base.$primary-color-dark-very-light);
+          }
+
+          img {
+            background:base.$primary-color-peachy;
+            padding: 6px;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+
+    hr {
+      border: 1px dashed #BEBEBE;
+    }
   }
 }
