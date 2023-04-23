@@ -4,10 +4,8 @@ import closeBtn from "../../assets/images/close.png"
 import promocodeImg from '../../assets/images/promo_code.png'
 import './cart.scss'
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-
-
+import { useEffect, useState } from "react";
+import { useFavoriteDishesAndCart } from "../../assets/hooks/favoriteDishesAndCartHook";
 const Cart = () => {
   type cartDataObj = {
     id: number;
@@ -16,13 +14,22 @@ const Cart = () => {
     shortDescription: string;
     price: string;
   }
-  const dish: cartDataObj[] = useSelector((state: RootState) => state.cart.items);
+  const { handleRemoveItem,handleConfirmOrder } = useFavoriteDishesAndCart()
   const navigate = useNavigate()
 
+  const [cart, setCart] = useState<cartDataObj[]>([]);
+  const dishes: cartDataObj[] = useSelector((state: RootState) => state.cart.items);
+  
+  useEffect(() => {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      setCart(JSON.parse(cartData));
+    }
+  }, [dishes]);
 
   // change amount of the dishes in the cart
   const [amounts, setAmounts] = useState<{ [id: number]: number }>(
-    dish.reduce<{ [id: number]: number }>((result, item) => {
+    dishes.reduce<{ [id: number]: number }>((result, item) => {
       result[item.id] = 1; // set initial amount to 1
       return result;
     }, {})
@@ -37,12 +44,16 @@ const Cart = () => {
   };
 
   // counting the price of an order - if subtotal price is less then 10$ delivery costs 2.99$ 
-  let subTotalPrice = dish.map((item) => Number(item.price) * amounts[item.id]).reduce((accumulator, currentValue) => accumulator + currentValue, 0).toFixed(2);
+  let subTotalPrice = cart.map((item) => Number(item.price) * amounts[item.id]).reduce((accumulator, currentValue) => accumulator + currentValue, 0).toFixed(2);
   let deliveryPrice = Number(subTotalPrice) > 10 ? 0 : 2.99
   let totalPrice = subTotalPrice !== '0.00' ? (Number(subTotalPrice) + deliveryPrice).toFixed(2) : '0.00';
   // rendering choosed items in the cart
-  const choosedDishes = dish.map((item) => {
-    if (amounts[item.id] > 0) {
+  const choosedDishes =
+    cart.map((item) => {
+      if (amounts[item.id] === 0) {
+        handleRemoveItem(item.id)
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
       return (
         <div key={item.price} className="orderItem" >
           <img className="orderItem_image" src={`http://localhost:5000/dish/${item.image}`} alt={item.name} />
@@ -60,12 +71,7 @@ const Cart = () => {
           </div>
         </div>)
     }
-    else {
-      return true
-    }
-  }
-  )
-
+    )
   return (
     <div className="wrapper">
       <div className="orderItem-header">
@@ -73,9 +79,9 @@ const Cart = () => {
         <button type="button" onClick={() => { navigate(-1) }} ><img src={closeBtn} alt="close" /></button>
       </div>
       <div className="orderItem-container">
-        {choosedDishes}
+        {choosedDishes.length > 0 ? choosedDishes : <span className="orderItem-container_no-orders">No items in the cart yet</span>}
       </div>
-      <div className="proba">
+      <div className="promocode-wrapper">
         <div className="promocode-container">
           <input placeholder="Promo code..."></input>
           <img alt="promo code" src={promocodeImg} />
@@ -98,7 +104,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="confirm-order-btn">
-          <button >CONFIRM ORDER</button>
+          <button onClick={handleConfirmOrder}>CONFIRM ORDER</button>
         </div>
       </div>
     </div>

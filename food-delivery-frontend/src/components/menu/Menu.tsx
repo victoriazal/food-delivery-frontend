@@ -3,63 +3,70 @@ import addPhoto from '../../assets/images/photo.png';
 import promotionPhoto from '../../assets/images/image_shopping_app.png';
 import filterBtn from '../../assets/images/filter.png';
 import searchBtn from '../../assets/images/searchBtn.png';
-import { Dish } from '../home/Home';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { instance } from '../../assets/axios';
-import { like } from '../../store/slice/favourite';
-import { RootState } from '../../store/store';
 import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png'
-import { addItem } from '../../store/slice/cart';
+import likedBtn from '../../assets/images/menu-icons/ic_favorite_selected.png'
+import { useState } from 'react';
+import { useFilter } from '../../assets/hooks/filterHook';
+import { useFavoriteDishesAndCart } from '../../assets/hooks/favoriteDishesAndCartHook';
+import { Dish } from '../home/Home';
+import ModalDish from '../modal/Modal';
+
 const Menu = () => {
+  //  modal window state and logic
+  const [modalActive, setModalActive] = useState(false)
+  const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
+  // using hooks
+  const { selectedFilters, handleFilterOption } = useFilter()
+  const { favoriteDishes, handleLike, cart, handleAddToCart } = useFavoriteDishesAndCart();
   // show filter options
-  const filterOptionsElem = document.querySelector(".menu-page_filter-options")
-  const showFilterOptions = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    filterOptionsElem?.classList.contains('show-options') ? filterOptionsElem.classList.remove('show-options') : filterOptionsElem?.classList.add('show-options')
+  const showFilterOptions = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const filterOptionsElem = document.querySelector('.menu-page_filter-options');
+    filterOptionsElem?.classList.toggle('show-options');
   };
+  // combine all tags from dishes short description
+  const filterOptionsArray = Array.from(new Set(favoriteDishes.flatMap(dish => dish.shortDescription.split(','))));
+  const filterOptionsLi = filterOptionsArray.map(option => (
+    <li key={option} className='options' onClick={(e: React.MouseEvent<HTMLLIElement>) => { handleFilterOption(option, e) }}>
+      {option}
+    </li>
+  ))
 
-  // getting liked dishes drom the other pages
-  type favouritesDataObj = {
-    id: number;
-    image: string;
-    name: string;
-    shortDescription: string;
-    price: string;
-    about: string;
-    rating: string;
-    time: string;
-  }
-  const dish: favouritesDataObj[] = useSelector((state: RootState) => state.favourite.items);
-  const dispatch = useDispatch();
-  const handleLike = (dish: Dish) => {
-    dispatch(like(dish));
-  };
-  const handleAddToCart = (dish: Dish) => {
-    dispatch(addItem(dish));
-  };
-
-  // rendering liked items
-  const favouriteDishes = dish.map((item) => {
-    return (
-      <div className="dish" key={item.name}>
-        <div className="dish-image-container">
-          <img className="dish-image" src={`http://localhost:5000/dish/${item.image}`} alt={item.name} />
-          <button onClick={() => handleLike(item)} className="like-btn">
-            <img className="like-btn-img" src={unlikedBtn} alt="like button" />
+  // search input state
+  const [searchInput, setSearchInput] = useState<string[]>([]);
+  const renderFavoriteDishes = favoriteDishes
+    .filter(dish => {
+      if (selectedFilters.length === 0) {
+        return true;
+      }
+      return selectedFilters.some(filter => dish.shortDescription.toLowerCase().includes(filter.toLowerCase()))
+    })
+    .filter(dish => {
+      if (searchInput.length === 0) {
+        return true;
+      }
+      return searchInput.some(search => dish.name.toLowerCase().includes(search.toLowerCase()));
+    })
+    .map((dish) => {
+      return (
+        <div className="dish" key={dish.name}>
+          <div className="dish-image-container">
+            <img onClick={(e) => { setModalActive(true); setSelectedDish(dish) }} className="dish-image" src={`http://localhost:5000/dish/${dish.image}`} alt={dish.name} />
+            <button onClick={() => handleLike(dish)} className="like-btn">
+              <img className="like-btn-img" src={favoriteDishes.some((favDish) => favDish.id === dish.id) ? likedBtn : unlikedBtn} alt="like button" />
+            </button>
+          </div>
+          <h4 onClick={() => { setModalActive(true); setSelectedDish(dish) }} >{dish.name}</h4>
+          <span>{dish.shortDescription}</span>
+          <h3>
+            $<span>{dish.price}</span>
+          </h3>
+          <button disabled={cart.includes(dish) ? true : false} onClick={() => handleAddToCart(dish)} className="add-to-cart-btn">
+            {cart.includes(dish) ? "Added" : "Add to cart"}
           </button>
-        </div>
-        <h4 >{item.name}</h4>
-        <span>{item.shortDescription}</span>
-        <h3>
-          $<span>{item.price}</span>
-        </h3>
-        <button onClick={() => handleAddToCart(item)} className="add-to-cart-btn">
-          Add to Cart
-        </button>
-      </div>)
-  }
-  )
+        </div>)
+    }
+    )
   return (
     <div className='menu-page'>
       <div className='menu-page_header'>
@@ -68,20 +75,13 @@ const Menu = () => {
       </div>
       <div>
         <div className='menu-page_filter'>
-          <input placeholder='Search food...' />
+          <input onChange={(e) => { setSearchInput([e.target.value]) }} type='search' placeholder='Search food...' />
           <button className='menu-page_filter-searchBtn' ><img alt="search button" src={searchBtn} /></button>
           <button onClick={(e) => { showFilterOptions(e) }} className='menu-page_filter-filterBtn'><img alt="filter button" src={filterBtn} /></button>
         </div>
         <div className='menu-page_filter-options'>
           <ul>
-            <li>Fast food</li>
-            <li>Vegetarian</li>
-            <li>Fish</li>
-            <li>Drink</li>
-            <li>Spicy</li>
-            <li>Salty</li>
-            <li>Sweet</li>
-            <li>Sour</li>
+            {filterOptionsLi}
           </ul>
         </div>
         <div className='promotion'>
@@ -94,8 +94,9 @@ const Menu = () => {
         </div>
       </div>
       <div className='menu-page_dishes-wrapper'>
-        {favouriteDishes}
+        {renderFavoriteDishes}
       </div>
+      <ModalDish active={modalActive} setActive={setModalActive} selectedDish={selectedDish} />
     </div>
   );
 }

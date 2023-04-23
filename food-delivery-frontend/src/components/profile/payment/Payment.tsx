@@ -1,6 +1,6 @@
 import { CardElement } from "@stripe/react-stripe-js";
-import { PaymentElement } from "@stripe/react-stripe-js";
-import { instance } from "../../../assets/axios";
+// import { PaymentElement } from "@stripe/react-stripe-js";
+// import { instance } from "../../../assets/axios";
 import './payment.scss'
 const Payment = () => {
 

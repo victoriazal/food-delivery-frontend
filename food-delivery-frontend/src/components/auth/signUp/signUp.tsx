@@ -1,9 +1,9 @@
 import './signUp.scss';
 import logo from '../../../assets/images/shopping-bag.png';
 import showPasswordIcon from '../../../assets/images/show-password-eye.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { instance } from '../../../assets/axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../../../store/slice/auth';
 import { useAppDispatch } from '../../../assets/hooks/hooks';
 
@@ -14,6 +14,20 @@ const SignUp = () => {
   const [username,setUsername] = useState('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  // get location to change styles depending on what page we are
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState("");
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location.pathname]);
+
+  // look what theme it was
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") ?? "dark";
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    if(storedTheme==="dark" ){
+      document.getElementById("darkmode-toggle")?.setAttribute("checked","checked")}
+  }, []);
 // show and hide password
   const toggleShowPassword = (e:{preventDefault:()=> void},input:string)=>{
       let myInput = document.getElementById(input) as HTMLInputElement
@@ -39,39 +53,39 @@ const SignUp = () => {
   }
   return (
       <div className="signUp">
-        <header className='signUp__header'>
+        <header className='signUp_header'>
           <img alt='corner food ' src={logo}/>
           <h2>Corner Food</h2>
           <span>Delivery App</span>
-          <div className='signUp__header-btns'>
+          <div className='signUp_header-btns'>
             <button onClick={()=>{navigate("*")}}>Login</button>
-            <button>Signup</button>
+            <button className={currentPath==='/signUp' ? "activePage" : ""}>Signup</button>
           </div>
         </header>
           <form onSubmit={handleSignUp} action="submit" method="post" className='signUp-form'>
-          <div className='signUp-form__email'>
+          <div className='signUp-form_email'>
               <p>Username</p>
               <input onChange={(e)=>{setUsername(e.target.value)}}  type="text" name="username" id="signUpUsername" />
             </div>
-            <div className='signUp-form__email'>
+            <div className='signUp-form_email'>
               <p>Email Address</p>
               <input onChange={(e)=>{setEmail(e.target.value)}} type="email" name="email" id="signUpEmail" />
             </div>
-            <div className='signUp-form__password'>
+            <div className='signUp-form_password'>
               <p>Password</p>
               <div>
               <input onChange={(e)=>{setPassword(e.target.value)}} type="password" name="password" id="signUpPassword" />
-              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
+              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpPassword")}} className='signUp-form_password' ><img alt='show password' src={showPasswordIcon}/></button>
               </div>
             </div>
-            <div className='signUp-form__password'>
+            <div className='signUp-form_password'>
               <p>Confirm</p>
               <div>
               <input onChange={(e)=>{setConfirmPassword(e.target.value)}}  type="password" name="password" id="signUpConfirmPassword" />
-              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpConfirmPassword")}} className='signUp-form__password' ><img alt='show password' src={showPasswordIcon}/></button>
+              <button type='button' onClick={(e)=>{toggleShowPassword(e,"signUpConfirmPassword")}} className='signUp-form_password' ><img alt='show password' src={showPasswordIcon}/></button>
               </div>
             </div>
-            <div className='signUp-form__button'>
+            <div className='signUp-form_button'>
               <button type="submit">Signup</button>
             </div>
           </form>

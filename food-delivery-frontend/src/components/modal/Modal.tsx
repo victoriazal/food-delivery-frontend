@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
-import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png'
+import unlikedBtn from '../../assets/images/menu-icons/ic_favorite_unselected.png';
 import starIcon from '../../assets/images/star.png';
 import timeIcon from '../../assets/images/time.png';
-
+import likedBtn from '../../assets/images/menu-icons/ic_favorite_selected.png';
 import './modal.scss'
 import { Dish } from '../home/Home';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { useFavoriteDishesAndCart } from '../../assets/hooks/favoriteDishesAndCartHook';
 
 interface ModalDishProps {
   active: boolean;
@@ -38,12 +39,16 @@ const ModalDish: FC<ModalDishProps> = ({ active, setActive, selectedDish }) => {
       return newAmounts;
     });
   };
+
+  // import hooks
+  const {handleLike,handleAddToCart,cart,favoriteDishes} = useFavoriteDishesAndCart()
   return (
+
     <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
       <div className={active ? "modal_content active" : "modal_content"} onClick={e => e.stopPropagation()}>
         <img className="modal_content_dish-image" src={selectedDish ? `http://localhost:5000/dish/${selectedDish?.image}` : starIcon} alt='ok' />
-        <button className="like-btn">
-          <img className="like-btn-img" src={unlikedBtn} alt="like button" />
+        <button onClick={()=>(selectedDish)?handleLike(selectedDish): console.log("can't add to favorite")} className="modal_content_dish-image_like-btn" >
+          <img className="like-btn-img"  src={favoriteDishes.some((favDish) => favDish.id === selectedDish?.id) ? likedBtn : unlikedBtn} alt="like button" />
         </button>
         <div className='modal_content_dish-info'>
           <div className='modal_content_dish-info_header'>
@@ -75,7 +80,9 @@ const ModalDish: FC<ModalDishProps> = ({ active, setActive, selectedDish }) => {
               <span>{amounts[selectedDish ? selectedDish?.id : 1]}</span>
               <button type="button" onClick={() => { changeQuantity(selectedDish ? selectedDish?.id : 1, +1) }}>+</button>
             </div>
-            <button className='modal_content_btns-cart'>Add to cart</button>
+            <button disabled={cart.some((elem) => elem.id === selectedDish?.id)? true : false} onClick={() => handleAddToCart(selectedDish)}className='modal_content_btns-cart'>
+            {cart.some((elem) => elem.id === selectedDish?.id) ? "Added" : "Add to cart"}
+          </button>
           </div>
         </div>
       </div>

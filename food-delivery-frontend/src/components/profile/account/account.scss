@@ -1,0 +1,14 @@
+@use '../../../assets/scss/base.scss';
+
+.account{
+  @include base.flex;
+  &_logout-btn{
+      background-color: base.$primary-color-peachy;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 5px 50px;
+      position: absolute;
+      bottom: calc(12vh);
+      @include base.font($font-size: 9px, $font-weight: 700, $line-height: 28px, $color: base.$primary-color-dark-green);
+  }
+}
