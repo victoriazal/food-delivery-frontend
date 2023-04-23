@@ -62,7 +62,7 @@ const Menu = () => {
             $<span>{dish.price}</span>
           </h3>
           <button disabled={cart.includes(dish) ? true : false} onClick={() => handleAddToCart(dish)} className="add-to-cart-btn">
-            {cart.includes(dish) ? "Added" : "Add to cart"}
+          {cart.some((elem) => elem.id === dish.id) ? "Added" : "Add to cart"}
           </button>
         </div>)
     }

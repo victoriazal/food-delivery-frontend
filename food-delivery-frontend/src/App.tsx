@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import PrivateRoute from './assets/router/privateRoute';
@@ -6,9 +7,14 @@ import SignUp from './components/auth/signUp/signUp';
 import Cart from './components/cart/Cart';
 import MenuLayout from './components/layout/MenuLayout';
 import PageNotFound from './components/notFound/PageNotFound';
-import Profile from './components/profile/Profile';
 
 function App() {
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") ?? "dark";
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    if(storedTheme==="dark" ){
+      document.getElementById("darkmode-toggle")?.setAttribute("checked","checked")}
+  }, []);
   return (
     <div className="App dark-theme">
       <Routes>
