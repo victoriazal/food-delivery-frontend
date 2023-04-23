@@ -125,6 +125,7 @@
   }
 
   .dish {
+    max-width: 270px;
     margin: 0 auto calc(3.2vh) auto;
     grid-column-start: auto;
     width: calc(34.6vw);
@@ -137,6 +138,7 @@
     box-sizing: border-box;
 
     &-image {
+      max-width: 250px;
       position: relative;
       width: calc(29.6vw);
       height: calc(11.1vh);
@@ -185,6 +187,7 @@
     }
 
     .add-to-cart-btn {
+      max-width: 240px;
       z-index: 3;
       width: calc(26.6vw);
       height: calc(3vh);
