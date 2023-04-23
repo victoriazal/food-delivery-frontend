@@ -24,7 +24,8 @@
     .profile_header,
     .modal_content_dish-info,
     .signUp_header,
-    .logIn_header, .notifications-card {
+    .logIn_header,
+    .notifications-card {
       background-color: #26273B;
     }
 
@@ -38,22 +39,30 @@
         color: #D1D1D1;
       }
     }
-    .payment_my-card{
-      h2{
+
+    .payment_my-card,
+    .orderItem-header,
+    .orderItem-container {
+      h2 ,span{
         color: #D1D1D1;
       }
     }
-    .dish,.profile_header {
+
+    .dish,
+    .profile_header {
       h4 {
         color: #D1D1D1;
       }
-      &-btns{
-        button{
+
+      &-btns {
+        button {
           color: #D1D1D1;
         }
       }
+
       h3 {
         color: #D1D1D1;
+
         span {
           color: #D1D1D1;
         }
@@ -72,16 +81,22 @@
         border: 0.5px solid $primary-color-peachy;
       }
     }
-    .logIn,.signUp{
-      input{
-        border-bottom:1px solid #2F3045;
+
+    .logIn,
+    .signUp {
+      input {
+        border-bottom: 1px solid #2F3045;
       }
-      h2,input,a{
-        color:$primary-background-light
+
+      h2,
+      input,
+      a {
+        color: $primary-background-light
       }
-      &_header-btns{
-        button{
-          color:#F2F6F7;
+
+      &_header-btns {
+        button {
+          color: #F2F6F7;
         }
       }
     }
