@@ -6,7 +6,6 @@ import SignUp from './components/auth/signUp/signUp';
 import Cart from './components/cart/Cart';
 import MenuLayout from './components/layout/MenuLayout';
 import PageNotFound from './components/notFound/PageNotFound';
-import Profile from './components/profile/Profile';
 
 function App() {
   return (
